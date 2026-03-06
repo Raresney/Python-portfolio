@@ -58,28 +58,6 @@ Includes:
 
 ---
 
-## 📂 Repository Structure
-
-```
-python-portfolio
-│
-├── ai-assistant
-│   ├── math_solver.py
-│   └── model_integration.py
-│
-├── rag-experiments
-│   ├── embeddings.py
-│   └── retrieval_pipeline.py
-│
-├── scripts
-│   ├── data_processing.py
-│   └── utilities.py
-│
-└── README.md
-```
-
----
-
 ## 🎯 Goals
 
 This repository was created to:
