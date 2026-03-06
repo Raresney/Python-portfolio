@@ -1,6 +1,8 @@
-Python Portfolio
+**Python Portfolio**
 
-Description
+
+
+*Description*
 
 
 
@@ -8,7 +10,7 @@ This repository showcases my Python projects, experiments, and data science appl
 
 
 
-Highlights
+*Highlights*
 
 
 
@@ -24,7 +26,7 @@ Python Experiments: Collection of scripts for data analysis, automation, and alg
 
 
 
-How to Use
+*How to Use*
 
 
 
@@ -40,5 +42,5 @@ License
 
 
 
-This code is protected. You may view and study it for educational purposes, but any modification, redistribution, or commercial use is strictly prohibited without prior written consent from the author.
+
 
