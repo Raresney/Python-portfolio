@@ -1,198 +1,98 @@
 # 🧠 Math Problem Retrieval System (RAG + Embeddings)
 
-A Python project focused on **processing mathematical datasets and building a semantic search system** using modern AI tools such as **SentenceTransformers, FAISS, and LangChain**.
+A Python project that builds a semantic search and code generation pipeline for mathematical problems using vector embeddings, FAISS, ChromaDB, and a RAG chain powered by OpenAI.
 
-The goal of this project is to experiment with **vector embeddings and retrieval techniques** for mathematical problem solving.
-
----
-
-# 🚀 Features
-
-🔹 Dataset cleaning and preprocessing from HuggingFace  
-🔹 Duplicate removal from math problem dataset  
-🔹 Generation of sentence embeddings for problems  
-🔹 Semantic similarity search using FAISS  
-🔹 Embedding model evaluation (precision, recall, hit rate)  
-🔹 Vector database creation with ChromaDB  
-🔹 Retrieval-Augmented Generation (RAG) style pipeline
+> Copyright (c) 2026 Bighiu Rares — [github.com/Raresney](https://github.com/Raresney)
 
 ---
 
-# 📂 Project Workflow
+## 📋 Features
 
-The project follows several main steps:
-
-### 1️⃣ Dataset Processing
-
-The dataset is loaded from HuggingFace and cleaned:
-
-- normalize problem text
-- remove special characters
-- remove duplicates
-- export cleaned dataset to CSV
-
-Dataset used:
-
-**sdiazlor/math-python-reasoning-dataset**
+| Step                    | Description                                                                           |
+| ----------------------- | ------------------------------------------------------------------------------------- |
+| 🧹 Dataset Cleaning     | Load from HuggingFace, normalize text, remove duplicates, export to CSV               |
+| 🔢 Embedding Generation | Convert problems to vectors using `all-MiniLM-L6-v2` and `BAAI/bge-base-en-v1.5`      |
+| 🔍 Similarity Search    | FAISS index for K-nearest neighbor retrieval with Hit Rate, Precision, Recall metrics |
+| 🗄️ Vector Database      | Store and query embeddings with ChromaDB via LangChain                                |
+| 🤖 RAG Pipeline         | Retrieve similar problems + generate Python code via OpenAI GPT-3.5-turbo             |
 
 ---
 
-### 2️⃣ Embedding Generation
+## ⚙️ Requirements
 
-Each math problem is converted into vector embeddings using:
-
-- `all-MiniLM-L6-v2`
-- `BAAI/bge-base-en-v1.5`
-
-Libraries used:
-
-- SentenceTransformers
-- PyTorch
-
----
-
-### 3️⃣ Similarity Search
-
-Semantic search is implemented using **FAISS**.
-
-The system retrieves the **K most similar math problems** to a given query.
-
-Evaluation metrics used:
-
-- Hit Rate@K
-- Precision@K
-- Recall@K
-- Average search time
-
----
-
-### 4️⃣ Vector Database
-
-A vector database is created using:
-
-- LangChain
-- ChromaDB
-
-This allows storing and querying embeddings efficiently.
-
----
-
-# 🛠️ Technologies
-
-- 🐍 Python
-- 🤗 HuggingFace Datasets
-- 🤖 SentenceTransformers
-- ⚡ FAISS
-- 🔗 LangChain
-- 🗄️ ChromaDB
-- 📊 Pandas
-- 🔥 PyTorch
-
----
-
-# 📊 Example Workflow
-
-```
-Load dataset
-     ↓
-Clean problem statements
-     ↓
-Remove duplicates
-     ↓
-Generate embeddings
-     ↓
-Create FAISS index
-     ↓
-Run similarity search
-     ↓
-Evaluate embedding models
-     ↓
-Store vectors in ChromaDB
-```
-
----
-
-# ⚙️ Installation
-
-Clone the repository:
-
-```bash
-git clone https://github.com/yourusername/python-portfolio.git
-cd python-portfolio
-```
-
-Install dependencies:
+- Python 3.8+
+- Google Colab (recommended) or local environment with GPU/CPU
 
 ```bash
 pip install datasets sentence-transformers faiss-cpu torch
-pip install langchain langchain-community chromadb pandas
+pip install langchain langchain-community langchain-openai chromadb pandas
+```
+
+For the RAG step, an **OpenAI API key** is required — set it as a Colab secret or environment variable:
+
+```bash
+export OPENAI_API_KEY=your_key_here
 ```
 
 ---
 
-# ▶️ Running the Project
-
-Run the notebook or Python script:
+## 🚀 Pipeline
 
 ```
-Proiect.ipynb
+Load dataset (HuggingFace)
+        ↓
+Clean & deduplicate problems
+        ↓
+Export to CSV
+        ↓
+Generate embeddings (SentenceTransformers)
+        ↓
+Build FAISS index + evaluate models
+        ↓
+Store vectors in ChromaDB
+        ↓
+RAG chain: retrieve similar problems → generate Python code (GPT-3.5-turbo)
 ```
-
-The pipeline will:
-
-1. download and clean the dataset
-2. generate embeddings
-3. evaluate embedding models
-4. build a FAISS index
-5. create a Chroma vector database
 
 ---
 
-# 📁 Output
+## ▶️ Run
 
-The project generates:
+Open and run `Proiect.ipynb` in Google Colab — the notebook executes the full pipeline sequentially.
+
+At the final step, you will be prompted to enter a math problem in natural language:
 
 ```
-math_python_dataset_curatat.csv
+>>> Introduceți problema matematică (în limbaj natural) și apăsați Enter:
+calculate the area of a circle with radius 5
 ```
 
-which contains:
+Output:
 
-- cleaned math problems
-- associated Python solutions
-
----
-
-# 🎯 Purpose
-
-This project was created to explore:
-
-- semantic search
-- vector embeddings
-- retrieval systems
-- AI-assisted problem solving
-
-It is mainly an **experimental project for learning modern AI retrieval techniques.**
+```python
+import math
+radius = 5
+area = math.pi * radius ** 2
+print(area)
+```
 
 ---
 
-# 👤 Author
+## 📊 Output Files
 
-**Rares Bighiu**
-
-Student — Mathematics & Computer Science  
-Alexandru Ioan Cuza University of Iași
-
-Interests:
-
-- Cybersecurity
-- Artificial Intelligence
-- Data Science
-- Machine Learning
+| File                              | Description                                             |
+| --------------------------------- | ------------------------------------------------------- |
+| `math_python_dataset_curatat.csv` | Cleaned dataset — problem statements + Python solutions |
+| `./chroma_db_math/`               | Persisted ChromaDB vector store                         |
 
 ---
 
-# 📜 License
+## 🛠️ Technologies
 
-© 2026 Rares Bighiu  
-All rights reserved.
+Python, HuggingFace Datasets, SentenceTransformers, FAISS, LangChain, ChromaDB, Pandas, PyTorch, OpenAI API
+
+---
+
+## 🎯 Purpose
+
+Experimental project for learning semantic search, vector embeddings, and RAG-based code generation.
